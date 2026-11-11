@@ -1,2 +1,5 @@
-// Public connection settings only. Never put a secret/service-role key here.
-window.PORTFOLIO_CONFIG = { supabaseUrl: '', supabaseKey: '' };
+// Public settings only. Database policies protect edits.
+window.PORTFOLIO_CONFIG = {
+  "supabaseUrl": "https://fjcytqknjzxfnialymmj.supabase.co",
+  "supabaseKey": "sb_publishable_jZidonXEWK1OB2DfLSds5g_XAZVlPgS"
+};
