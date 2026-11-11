@@ -26,3 +26,13 @@ Keep a content backup after major edits. Update `data/content.json` occasionally
 
 The website is at the repository root. No build/install command is needed; use Vercel's Other preset.
 Commit and push to the connected production branch to deploy. Keep the `.git` folder when updating files.
+
+## Username login
+
+The admin form accepts a username and password. Supabase verifies the password against
+`username@portfolio.invalid`; this is an internal identifier, not an email inbox.
+For `batagoreng`, create `batagoreng@portfolio.invalid` in Authentication > Users with
+Auto Confirm User enabled, then allowlist that new user UUID using the setup guide.
+Creating an alias account does not transfer admin permission from an older email account.
+Use the Supabase dashboard for password resets; email recovery is unavailable for this alias.
+Usernames are case-insensitive. Passwords are never stored in this repository.

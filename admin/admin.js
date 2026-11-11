@@ -117,10 +117,12 @@
  async function openWorkspace(user){
   const {data:allowed,error:roleError}=await client.rpc('is_portfolio_admin');if(roleError)throw new Error('Run the Supabase setup SQL before signing in. '+roleError.message);if(!allowed){await client.auth.signOut();throw new Error('This account does not have admin access. Add its user UUID during setup.');}
   const {data,error}=await client.from('portfolio_content').select('payload,revision').eq('id','main').maybeSingle();if(error)throw error;
-  draft=data?.payload?C.normalize(data.payload):C.clone(base);revision=data?.revision||0;preview=false;dirty=false;formEdits=false;$('#preview-banner').hidden=true;$('#account-label').textContent=user.email;$('#sign-out').textContent='Sign out';show('workspace');render();
+  draft=data?.payload?C.normalize(data.payload):C.clone(base);revision=data?.revision||0;preview=false;dirty=false;formEdits=false;$('#preview-banner').hidden=true;$('#account-label').textContent=user.email?.endsWith('@portfolio.invalid')?user.email.split('@')[0]:'Admin';$('#sign-out').textContent='Sign out';show('workspace');render();
  }
  $('#login-form').onsubmit=async e=>{e.preventDefault();const b=$('#login-submit');b.disabled=true;b.textContent='Signing in…';try{
-  const {data,error}=await client.auth.signInWithPassword({email:$('#admin-email').value.trim(),password:$('#admin-password').value});$('#admin-password').value='';if(error)throw new Error('Sign-in failed. Check your email and password.');await openWorkspace(data.user);
+  const username=$('#admin-username').value.trim().toLowerCase();
+  if(!/^[a-z0-9_]{3,32}$/.test(username))throw new Error('Use a username with 3–32 letters, numbers, or underscores.');
+  const {data,error}=await client.auth.signInWithPassword({email:username+'@portfolio.invalid',password:$('#admin-password').value});$('#admin-password').value='';if(error)throw new Error('Sign-in failed. Check your username and password.');await openWorkspace(data.user);
  }catch(error){status(error.message,true);}finally{b.disabled=false;b.textContent='Sign in';}};
  const c=C.connection();if(!c){show('setup-panel');return;}
  try{
