@@ -1,0 +1,285 @@
+{
+  "version": 1,
+  "profile": {
+    "aboutHeading": "A little about me.",
+    "about": [
+      "I’m Jerikho Raphael Stefian, a Computer Science student at BINUS University in Indonesia, specializing in Artificial Intelligence.",
+      "I enjoy taking things apart conceptually: understanding how a model makes a prediction, what a security event reveals, or how a tool can make everyday work easier.",
+      "Beyond the screen, I like traveling, exploring new places, and learning about financial markets. Mentoring and volunteering remind me that good technical work starts with understanding people."
+    ],
+    "heroIntro": "Computer Science student exploring AI, working with data, and building skills in defensive cybersecurity.",
+    "heroNote": "BINUS University · Incoming SOC Intern at BCA, February 2027",
+    "cvUrl": "/Jerikho-Stefian-CV.pdf"
+  },
+  "projects": [
+    {
+      "id": "meeting",
+      "title": "Automatic Meeting Summarizer",
+      "kicker": "NLP / AI APPLICATION",
+      "summary": "Turning meeting transcripts into concise summaries with a fine-tuned language model.",
+      "categories": [
+        "ai"
+      ],
+      "visual": "meeting",
+      "tools": [
+        "Python",
+        "PyTorch",
+        "Hugging Face Transformers",
+        "Flask"
+      ],
+      "intro": "A web application that turns written meeting transcripts into summaries using a fine-tuned PEGASUS model.",
+      "heading": "How it works",
+      "points": [
+        "Accepts a written transcript through a browser interface.",
+        "Cleans whitespace, tokenizes the input, and generates a summary using PEGASUS.",
+        "Connects the model to a Flask API for browser-based interaction."
+      ],
+      "note": "This application processes text transcripts. The current inference code truncates inputs to 512 tokens; it does not transcribe audio.",
+      "links": [
+        {
+          "label": "View repository",
+          "url": "https://github.com/lemaopisan/Automatic-Meeting-Summarizer"
+        }
+      ]
+    },
+    {
+      "id": "housing",
+      "title": "House Price Prediction",
+      "kicker": "REGRESSION / INTERACTIVE APPLICATION",
+      "summary": "Connecting a machine learning model to an interactive property price estimator.",
+      "categories": [
+        "ai"
+      ],
+      "visual": "housing",
+      "tools": [
+        "Python",
+        "XGBoost",
+        "Streamlit"
+      ],
+      "intro": "An Ames Housing price prediction project connecting an XGBoost regression model to a Streamlit interface.",
+      "heading": "From features to an estimate",
+      "points": [
+        "Uses a trained XGBoost model to estimate a property’s sale price.",
+        "Accepts six features: total floor area, lot area, year built, bedrooms, bathrooms, and garage capacity.",
+        "Provides an interactive interface for entering property details and viewing model predictions."
+      ],
+      "note": "Predictions are model estimates for a learning project, not property valuations. The portfolio chart is illustrative and does not represent evaluation results.",
+      "links": [
+        {
+          "label": "View repository",
+          "url": "https://github.com/lemaopisan/House-Price-Prediction"
+        }
+      ]
+    },
+    {
+      "id": "soc",
+      "title": "Mini SOC Lab",
+      "kicker": "BLUE TEAM / SECURITY MONITORING",
+      "summary": "Exploring endpoint telemetry, Windows event logs, and security alert investigation.",
+      "categories": [
+        "security"
+      ],
+      "visual": "soc",
+      "tools": [
+        "Wazuh SIEM",
+        "Sysmon",
+        "Windows event logs"
+      ],
+      "intro": "A hands-on lab for understanding how Windows endpoint telemetry becomes evidence during a security investigation.",
+      "heading": "What I practiced",
+      "points": [
+        "Configured a Wazuh-based environment to collect and analyze endpoint security events.",
+        "Explored Windows authentication logs and relevant event fields to understand login activity.",
+        "Reviewed alerts and event data to practice security event triage and investigation workflows."
+      ],
+      "note": "This is a personal lab project. It demonstrates foundational monitoring and investigation practice, rather than production SOC experience.",
+      "links": []
+    },
+    {
+      "id": "malware",
+      "title": "Malware Image Classification",
+      "kicker": "MACHINE LEARNING / CYBERSECURITY",
+      "summary": "Exploring image-based representations for machine learning malware classification.",
+      "categories": [
+        "ai",
+        "security"
+      ],
+      "visual": "malware",
+      "tools": [
+        "Machine learning",
+        "Image representations",
+        "Classification"
+      ],
+      "intro": "A machine learning project exploring malware classification through image-based representations.",
+      "heading": "The idea",
+      "points": [
+        "Represent malware samples as images for a classification task.",
+        "Explore how visual patterns can support machine learning classification.",
+        "Connect interests in artificial intelligence and security analysis."
+      ],
+      "note": "Explore the implementation and project materials in the repository.",
+      "links": [
+        {
+          "label": "View repository",
+          "url": "https://github.com/lemaopisan/malware-classification"
+        }
+      ]
+    },
+    {
+      "id": "split",
+      "title": "SplitEase",
+      "kicker": "ANDROID / APPLICATION DEVELOPMENT",
+      "summary": "An Android app for splitting bills with receipt recognition and shared sessions.",
+      "categories": [
+        "app"
+      ],
+      "visual": "split",
+      "tools": [
+        "Android",
+        "Google Cloud Vision",
+        "Firebase Realtime Database"
+      ],
+      "intro": "An Android application designed to make shared expense management easier through receipt recognition and shareable expense sessions.",
+      "heading": "What the application does",
+      "points": [
+        "Manages shared bills and calculates individual payment amounts.",
+        "Uses Google Cloud Vision OCR to extract receipt text.",
+        "Uses Firebase Realtime Database to share expense sessions through links."
+      ],
+      "note": "Developed February–June 2026, with hands-on experience integrating external APIs and cloud services.",
+      "links": [
+        {
+          "label": "View repository",
+          "url": "https://github.com/lemaopisan/sofeng"
+        }
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "id": "bca",
+      "title": "SOC Intern",
+      "organization": "BCA",
+      "date": "FEB 2027",
+      "description": "Accepted for a Security Operations Center internship starting February 2027.",
+      "tags": [],
+      "incoming": true
+    },
+    {
+      "id": "ncw",
+      "title": "CTF Problem Setter",
+      "organization": "NCW",
+      "date": "NOV 2026",
+      "description": "Designing and developing challenges for the Forensics category.",
+      "tags": [
+        "Digital forensics",
+        "Challenge design"
+      ],
+      "incoming": false
+    },
+    {
+      "id": "ifest",
+      "title": "CTF Problem Setter",
+      "organization": "IFEST 2026",
+      "date": "SEP 2026",
+      "description": "Developed and validated reverse engineering challenges. Reviewed submissions and monitored participant progress to support fair competition.",
+      "tags": [
+        "Reverse engineering",
+        "Solution validation"
+      ],
+      "incoming": false
+    },
+    {
+      "id": "petir",
+      "title": "Cybersecurity Apprentice",
+      "organization": "PETIR",
+      "date": "MAY 2026 — PRESENT",
+      "description": "Collaborative learning and hands-on problem-solving through internal and external CTF competitions.",
+      "tags": [],
+      "incoming": false
+    },
+    {
+      "id": "mentor",
+      "title": "Scholarship Mentor",
+      "organization": "BINUS SASC",
+      "date": "FEB — JUL 2026",
+      "description": "Mentored up to six students across approximately 25 sessions, covering security, scientific computing, NLP, computer vision, and machine learning.",
+      "tags": [],
+      "incoming": false
+    },
+    {
+      "id": "buddy",
+      "title": "Volunteer Buddy",
+      "organization": "Buddy Tour",
+      "date": "AUG 2026",
+      "description": "Supported visually impaired students during an educational visit to PP-IPTEK, helping make exhibits and activities accessible.",
+      "tags": [],
+      "incoming": false
+    }
+  ],
+  "toolkit": [
+    {
+      "id": "programming",
+      "title": "Programming & data",
+      "items": [
+        "Python",
+        "SQL",
+        "C",
+        "JavaScript",
+        "Bash",
+        "Git"
+      ]
+    },
+    {
+      "id": "ai",
+      "title": "AI & machine learning",
+      "items": [
+        "NLP",
+        "Computer vision",
+        "Model evaluation",
+        "PyTorch",
+        "XGBoost"
+      ]
+    },
+    {
+      "id": "security",
+      "title": "Defensive security",
+      "items": [
+        "Wazuh",
+        "Sysmon",
+        "Wireshark",
+        "Autopsy",
+        "Ghidra",
+        "Linux"
+      ]
+    },
+    {
+      "id": "applications",
+      "title": "Applications",
+      "items": [
+        "Flask",
+        "Streamlit",
+        "Docker",
+        "HTML / CSS"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "id": "binus",
+      "institution": "BINUS University",
+      "program": "Computer Science · AI specialization",
+      "date": "2024–2028",
+      "details": "GPA 3.74 · Expected graduation 2028",
+      "icon": "graduation"
+    },
+    {
+      "id": "rework",
+      "institution": "Rework Academy",
+      "program": "Cybersecurity Bootcamp",
+      "date": "Aug–Oct 2026",
+      "details": "SOC operations, incident response, penetration testing, web security, and Linux fundamentals.",
+      "icon": "shield"
+    }
+  ]
+}

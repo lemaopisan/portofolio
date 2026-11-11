@@ -1,16 +1,18 @@
-const projects={
-meeting:{title:'Automatic Meeting Summarizer',category:'NLP / AI APPLICATION',intro:'A web application that turns written meeting transcripts into summaries using a fine-tuned PEGASUS model.',tools:['Python','PyTorch','Hugging Face Transformers','Flask'],heading:'How it works',points:['Accepts a written transcript through a browser interface.','Cleans whitespace, tokenizes the input, and generates a summary using PEGASUS.','Connects the model to a Flask API for browser-based interaction.'],note:'This application processes text transcripts. The current inference code truncates inputs to 512 tokens; it does not transcribe audio.',url:'https://github.com/lemaopisan/Automatic-Meeting-Summarizer'},
-housing:{title:'House Price Prediction',category:'REGRESSION / INTERACTIVE APPLICATION',intro:'An Ames Housing price prediction project connecting an XGBoost regression model to a Streamlit interface.',tools:['Python','XGBoost','Streamlit'],heading:'From features to an estimate',points:['Uses a trained XGBoost model to estimate a property’s sale price.','Accepts six features: total floor area, lot area, year built, bedrooms, bathrooms, and garage capacity.','Provides an interactive interface for entering property details and viewing model predictions.'],note:'Predictions are model estimates for a learning project, not property valuations. The portfolio chart is illustrative and does not represent evaluation results.',url:'https://github.com/lemaopisan/House-Price-Prediction'},
-soc:{title:'Mini SOC Lab',category:'BLUE TEAM / SECURITY MONITORING',intro:'A hands-on lab for understanding how Windows endpoint telemetry becomes evidence during a security investigation.',tools:['Wazuh SIEM','Sysmon','Windows event logs'],heading:'What I practiced',points:['Configured a Wazuh-based environment to collect and analyze endpoint security events.','Explored Windows authentication logs and relevant event fields to understand login activity.','Reviewed alerts and event data to practice security event triage and investigation workflows.'],note:'This is a personal lab project. It demonstrates foundational monitoring and investigation practice, rather than production SOC experience.'},
-malware:{title:'Malware Image Classification',category:'MACHINE LEARNING / CYBERSECURITY',intro:'A machine learning project exploring malware classification through image-based representations.',tools:['Machine learning','Image representations','Classification'],heading:'The idea',points:['Represent malware samples as images for a classification task.','Explore how visual patterns can support machine learning classification.','Connect interests in artificial intelligence and security analysis.'],note:'Further model and evaluation details are available in the original project materials. No accuracy figures are claimed here.'},
-split:{title:'SplitEase',category:'ANDROID / APPLICATION DEVELOPMENT',intro:'An Android application designed to make shared expense management easier through receipt recognition and shareable expense sessions.',tools:['Android','Google Cloud Vision','Firebase Realtime Database'],heading:'What the application does',points:['Manages shared bills and calculates individual payment amounts.','Uses Google Cloud Vision OCR to extract receipt text.','Uses Firebase Realtime Database to share expense sessions through links.'],note:'Developed February–June 2026, with hands-on experience integrating external APIs and cloud services.'}
-};
+(async()=>{
+const data=await window.PortfolioContent.load();
+window.PortfolioContent.render(data);
+const projects=Object.fromEntries(data.projects.map(p=>[p.id,p]));
+const esc=window.PortfolioContent.escape;
 const dialog=document.querySelector('#project-dialog');
-document.querySelectorAll('[data-project]').forEach(button=>button.addEventListener('click',()=>{
- const p=projects[button.dataset.project];
- document.querySelector('#dialog-content').innerHTML=`<div class="eyebrow subdued">${p.category}</div><h2 id="dialog-title">${p.title}</h2><div class="tags">${p.tools.map(t=>`<span>${t}</span>`).join('')}</div><p class="detail-intro">${p.intro}</p><h3>${p.heading}</h3><ul>${p.points.map(t=>`<li>${t}</li>`).join('')}</ul><p class="detail-note">${p.note}</p><div class="detail-footer">${p.url?`<a class="button primary" href="${p.url}" target="_blank" rel="noopener noreferrer">View repository ↗</a>`:''}</div>`;
- dialog.showModal();document.body.style.overflow='hidden';
-}));
+document.querySelector('#projects').addEventListener('click',event=>{
+ const button=event.target.closest('[data-project]');if(!button)return;
+ const p=projects[button.dataset.project];if(!p)return;
+ document.querySelector('#dialog-content').innerHTML='<div class="eyebrow subdued">'+esc(p.kicker)+'</div><h2 id="dialog-title">'+esc(p.title)+'</h2><div class="tags">'+p.tools.map(t=>'<span>'+esc(t)+'</span>').join('')+'</div><p class="detail-intro">'+esc(p.intro)+'</p><h3>'+esc(p.heading)+'</h3><ul>'+p.points.map(t=>'<li>'+esc(t)+'</li>').join('')+'</ul>'+(p.note?'<p class="detail-note">'+esc(p.note)+'</p>':'')+'<div class="detail-footer">'+p.links.map(l=>'<a class="button primary" href="'+esc(l.url)+'" target="_blank" rel="noopener noreferrer" data-project-link="'+esc(p.id)+'">'+esc(l.label)+' ↗</a>').join('')+'</div>';
+ dialog.showModal();document.body.style.overflow='hidden';window.PortfolioContent.track('project_open',p.id);
+});
+document.querySelector('#dialog-content').addEventListener('click',e=>{if(e.target.closest('[data-project-link]'))window.PortfolioContent.track('project_link',e.target.closest('[data-project-link]').dataset.projectLink);});
+document.querySelectorAll('a[download]').forEach(a=>a.addEventListener('click',()=>window.PortfolioContent.track('cv_click','cv')));
+window.PortfolioContent.track('page_view',location.pathname);
 document.querySelector('#close-dialog').addEventListener('click',()=>dialog.close());
 dialog.addEventListener('close',()=>{document.body.style.overflow='';});
 dialog.addEventListener('click',e=>{const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();});
@@ -24,10 +26,11 @@ document.querySelector('#copy-email').addEventListener('click',async()=>{const t
 const viewer=document.querySelector('.file-browser');
 const cards=[...document.querySelectorAll('.project-card')];
 const pagination=document.querySelector('.deck-pagination');
-const filenames={meeting:'meeting-summarizer.project',housing:'house-price-prediction.project',soc:'mini-soc-lab.project',malware:'malware-classification.project',split:'splitease.project'};
+const filenames=Object.fromEntries(data.projects.map(p=>[p.id,p.id+'.project']));
 let visibleCards=cards.slice(),fileIndex=0,lastWheelAt=0,wheelTotal=0,lastWheelEvent=0;
 const previous=document.querySelector('#previous-project'),next=document.querySelector('#next-project');
 function showFile(index){
+ if(!visibleCards.length){cards.forEach(card=>card.hidden=true);document.querySelector('#file-name').textContent='No projects in this category';document.querySelector('#file-count').textContent='00 / 00';previous.disabled=next.disabled=true;return;}
  fileIndex=((index%visibleCards.length)+visibleCards.length)%visibleCards.length;
  cards.forEach(card=>{card.hidden=card!==visibleCards[fileIndex];});
  const current=visibleCards[fileIndex];
@@ -79,3 +82,5 @@ const entranceObserver=new IntersectionObserver(entries=>{
  entries.forEach(entry=>{if(entry.isIntersecting){viewer.classList.add('viewer-open');entranceObserver.disconnect();}});
 },{threshold:0.2});
 entranceObserver.observe(viewer);
+
+})().catch(error=>{console.error('Portfolio content could not be initialized:',error.message);});
