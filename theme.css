@@ -1,0 +1,104 @@
+.header-actions{display:flex;align-items:center;gap:23px}.theme-toggle{display:flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--line);background:#ffffff05;color:#a9b6cb;border-radius:10px;padding:8px 11px;font-size:10px;line-height:1.5;cursor:pointer}.theme-toggle:hover{background:#ffffff0d;color:#edf3ff}.theme-toggle svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}.theme-toggle .moon-icon{display:none}
+html[data-theme=light]{color-scheme:light;--bg:#f5f6fa;--panel:#fff;--text:#202a3b;--muted:#59677b;--line:rgba(35,54,83,.12);--blue:#315f9f}
+html[data-theme=light] .ambient{background:radial-gradient(ellipse at 82% 40%,#b9cbef55,transparent 50%)}
+html[data-theme=light] .wordmark span{color:#557ab9}
+html[data-theme=light] .top-contact span,html[data-theme=light] .hero-sub{color:#65758e}
+html[data-theme=light] .theme-toggle{background:#fff9;color:#435874;box-shadow:0 2px 8px #324b6d05}
+html[data-theme=light] .theme-toggle:hover{background:#fff;color:#203759}
+html[data-theme=light] .theme-toggle .sun-icon{display:none}
+html[data-theme=light] .theme-toggle .moon-icon{display:block}
+html[data-theme=light] .gradient-text{background-image:linear-gradient(105deg,#315d99,#77629f)}
+html[data-theme=light] .intro{color:#55647b}
+html[data-theme=light] .primary{background:#273f64;color:#fff;box-shadow:0 5px 18px #2d4d7c12}
+html[data-theme=light] .primary:hover{background:#1b3152}
+html[data-theme=light] .secondary{background:#fff9;color:#425774;border-color:#344d7422}
+html[data-theme=light] .orbit{border-color:#4d6c9c13}
+html[data-theme=light] .glass-art{background:linear-gradient(130deg,#ffffffc9,#d9e3f2a8 48%,#dcd7eeaa);border-color:#fff;box-shadow:inset 1px 1px #fff,0 30px 80px #7e91ae20}
+html[data-theme=light] .glass-shine{background:linear-gradient(135deg,#fff9,transparent 45%)}
+html[data-theme=light] .core-mark{color:#385276;text-shadow:0 1px #fff}
+html[data-theme=light] .core-mark span{color:#6985b3}
+html[data-theme=light] .floating-chip{background:linear-gradient(115deg,#ffffffed,#eaf0f8e6);border-color:#fff;box-shadow:0 10px 35px #6c7e9b1a,inset 0 1px #fff}
+html[data-theme=light] .floating-chip strong{color:#31435d}
+html[data-theme=light] .floating-chip small{color:#62728c}
+html[data-theme=light] .intro-strip>div{color:#4d607b}
+html[data-theme=light] .intro-strip i{background:#95a5bb}
+html[data-theme=light] h2 span{color:#71839c}
+html[data-theme=light] .filters{background:#e9edf4;border-color:#d7dfec}
+html[data-theme=light] .filters button{color:#60728a}
+html[data-theme=light] .filters button.active{background:#fff;color:#263e62;box-shadow:0 2px 7px #334c7112}
+html[data-theme=light] .filters button span{color:#687c9b}
+html[data-theme=light] .file-browser{background:linear-gradient(140deg,#fdfefe,#e8edf6);border-color:#cdd7e7;box-shadow:0 25px 70px #60769714,inset 0 1px #fff}
+html[data-theme=light] .file-browser::before{background:#e5ebf5;border-color:#cdd8e8}
+html[data-theme=light] .file-browser::after{background:#dfe6f0;border-color:#cdd8e8}
+html[data-theme=light] .file-toolbar,html[data-theme=light] .file-controls{border-color:#344d7414}
+html[data-theme=light] .file-path{color:#6c7d96}
+html[data-theme=light] .file-path strong{color:#3d5578}
+html[data-theme=light] .file-browser .project-card{background:#fff;border-color:#dbe2ed}
+html[data-theme=light] .file-browser .project-card:hover{border-color:#8ca7ce}
+html[data-theme=light] .project-info h3{color:#243752}
+html[data-theme=light] .project-info p{color:#5a6d87}
+html[data-theme=light] .project-kicker{color:#637a9a}
+html[data-theme=light] .project-info .tags span,html[data-theme=light] .timeline .tags span{background:#edf2f8;border-color:#dbe3ef;color:#506887}
+html[data-theme=light] .file-browser .project-info::after{color:#426da6}
+html[data-theme=light] .file-hint,html[data-theme=light] .file-arrows>span{color:#5a7295}
+html[data-theme=light] .file-arrows button{color:#49678e;background:#fff;border-color:#d2dceb}
+html[data-theme=light] .file-arrows button:hover:not(:disabled){background:#e1eaf7}
+html[data-theme=light] .deck-pagination button{background:#bbc9dd}
+html[data-theme=light] .deck-pagination button[aria-current=true]{background:#5879a7}
+html[data-theme=light] .work-note{color:#65768e}
+html[data-theme=light] .experience-section{background:#edf1f7;border-color:#dfe5ee}
+html[data-theme=light] .timeline-date{color:#647792}
+html[data-theme=light] .future-label{color:#3f669e;border-color:#b7cae3}
+html[data-theme=light] .company{color:#647c9d}
+html[data-theme=light] .timeline-item p,html[data-theme=light] .about-copy>p{color:#596c87}
+html[data-theme=light] .education-heading{color:#526c90}
+html[data-theme=light] .education-icon{color:#5879a5;background:#e8eef7;border-color:#d7e1ee}
+html[data-theme=light] .education-note div span{color:#5c7190}
+html[data-theme=light] .education-note small{color:#6e7e96}
+html[data-theme=light] .toolbox{background:linear-gradient(135deg,#fff,#eaf0f9);border-color:#d3deed;box-shadow:0 25px 70px #6d81a015,inset 0 1px #fff}
+html[data-theme=light] .toolbox-header small,html[data-theme=light] .tool-row p,html[data-theme=light] .toolbox-footer{color:#657b99}
+html[data-theme=light] .tool-row>span{color:#7f94b1}
+html[data-theme=light] .contact-card{background:radial-gradient(ellipse at 50% 0%,#d6e2f9aa,transparent 75%),#fff;border-color:#d5dfed}
+html[data-theme=light] .contact-card h2 span{color:#5d789f}
+html[data-theme=light] .contact-card>p,html[data-theme=light] .email-link{color:#667c9b}
+html[data-theme=light] .contact-links a,html[data-theme=light] .contact-links button{color:#526f98}
+html[data-theme=light] .footer{color:#7185a2}
+html[data-theme=light] .footer a,html[data-theme=light] .intro-replay{color:#547199}
+html[data-theme=light] .dock{background:#f7faffbb;border-color:#fff;box-shadow:0 8px 35px #344d7420,inset 0 1px #fff}
+html[data-theme=light] .dock a{color:#7b8eab}
+html[data-theme=light] .dock a.active{color:#345f99;background:#b2c9ec40}
+html[data-theme=light] .dock a:hover{color:#284b7b;background:#cbd9f03d}
+html[data-theme=light] .dock-divider{background:#6c86ac2b}
+html[data-theme=light] .dock a>span{background:#fff;border-color:#d7e1ef;color:#4a668d}
+html[data-theme=light] dialog{background:#f9fbff;color:#263953;border-color:#cad8eb;box-shadow:0 40px 100px #2d45684d}
+html[data-theme=light] dialog::backdrop{background:#71839e66}
+html[data-theme=light] .dialog-top{background:#f9fbff;color:#6d829f}
+html[data-theme=light] .dialog-top button{background:#e7eef8;border-color:#d1ddee;color:#4c6b95}
+html[data-theme=light] #dialog-content p,html[data-theme=light] #dialog-content li{color:#5c7292}
+html[data-theme=light] #dialog-content .tags span{background:#eaf0f8;border-color:#d6e0ee;color:#547096}
+html[data-theme=light] .toast{background:#fff;border-color:#c7d6e9;color:#3a5c8b;box-shadow:0 8px 25px #526e9720}
+html[data-theme=light] .site-intro{background:#f1f4fa;color:#344e74}
+html[data-theme=light] .intro-halo{background:radial-gradient(circle,#aec5ea60,transparent 65%)}
+html[data-theme=light] .intro-glass{background:linear-gradient(145deg,#ffffffb8,#cad9ed80 50%,#d8cfee99);border-color:#fff;box-shadow:inset 1px 1px #fff,0 25px 90px #6484b222}
+html[data-theme=light] .intro-monogram{color:#3d587e;text-shadow:0 1px #fff}
+html[data-theme=light] .intro-monogram span{color:#7594c4}
+html[data-theme=light] .intro-fragment{background:#ffffffbd;border-color:#d4dff0;color:#536e95;box-shadow:0 8px 30px #7e91b119}
+html[data-theme=light] .intro-fragment b{color:#8d75b4}
+html[data-theme=light] .fragment-data b{color:#5d8ac4}
+html[data-theme=light] .fragment-security b{color:#4e8d7e}
+html[data-theme=light] .intro-orbit{border-color:#6485b325}
+html[data-theme=light] .intro-cross{border-color:#6f8bb74d}
+html[data-theme=light] .intro-skip{color:#617b9d;background:#ffffff80;border-color:#c5d5e9}
+@media(max-width:700px){.header-actions{gap:15px}.theme-toggle{padding:7px 9px}.theme-label{display:none}}
+
+/* Keep the theme control alongside navigation at every scroll position. */
+.dock .theme-toggle{position:relative;flex-shrink:0;width:48px;height:46px;padding:0;border:0;border-radius:14px;background:transparent;color:#929db2;box-shadow:none;transition:background .2s,color .2s,transform .2s}
+.dock .theme-toggle svg{width:19px;height:19px}
+.dock .theme-toggle:hover{background:#ffffff0a;color:#fff;transform:translateY(-3px)}
+.dock .theme-toggle .theme-label{display:block;position:absolute;bottom:61px;white-space:nowrap;font-size:9px;padding:3px 9px;background:#252c3d;border:1px solid #ffffff15;border-radius:6px;opacity:0;pointer-events:none;transition:opacity .2s}
+.dock .theme-toggle:hover .theme-label,.dock .theme-toggle:focus-visible .theme-label{opacity:1}
+html[data-theme=light] .dock .theme-toggle{background:transparent;color:#7b8eab;box-shadow:none;border:0}
+html[data-theme=light] .dock .theme-toggle:hover{background:#cbd9f03d;color:#284b7b}
+html[data-theme=light] .dock .theme-label{background:#fff;border-color:#d7e1ef;color:#4a668d}
+@media(max-width:700px){.dock .theme-toggle{width:43px;height:43px}}
+@media(max-width:420px){.dock{gap:3px;padding:7px;max-width:calc(100% - 24px)}.dock a,.dock .theme-toggle{width:36px;height:40px;flex:0 0 36px}.dock-divider{margin-inline:2px}}

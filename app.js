@@ -1,0 +1,81 @@
+const projects={
+meeting:{title:'Automatic Meeting Summarizer',category:'NLP / AI APPLICATION',intro:'A web application that turns written meeting transcripts into summaries using a fine-tuned PEGASUS model.',tools:['Python','PyTorch','Hugging Face Transformers','Flask'],heading:'How it works',points:['Accepts a written transcript through a browser interface.','Cleans whitespace, tokenizes the input, and generates a summary using PEGASUS.','Connects the model to a Flask API for browser-based interaction.'],note:'This application processes text transcripts. The current inference code truncates inputs to 512 tokens; it does not transcribe audio.',url:'https://github.com/lemaopisan/Automatic-Meeting-Summarizer'},
+housing:{title:'House Price Prediction',category:'REGRESSION / INTERACTIVE APPLICATION',intro:'An Ames Housing price prediction project connecting an XGBoost regression model to a Streamlit interface.',tools:['Python','XGBoost','Streamlit'],heading:'From features to an estimate',points:['Uses a trained XGBoost model to estimate a property’s sale price.','Accepts six features: total floor area, lot area, year built, bedrooms, bathrooms, and garage capacity.','Provides an interactive interface for entering property details and viewing model predictions.'],note:'Predictions are model estimates for a learning project, not property valuations. The portfolio chart is illustrative and does not represent evaluation results.',url:'https://github.com/lemaopisan/House-Price-Prediction'},
+soc:{title:'Mini SOC Lab',category:'BLUE TEAM / SECURITY MONITORING',intro:'A hands-on lab for understanding how Windows endpoint telemetry becomes evidence during a security investigation.',tools:['Wazuh SIEM','Sysmon','Windows event logs'],heading:'What I practiced',points:['Configured a Wazuh-based environment to collect and analyze endpoint security events.','Explored Windows authentication logs and relevant event fields to understand login activity.','Reviewed alerts and event data to practice security event triage and investigation workflows.'],note:'This is a personal lab project. It demonstrates foundational monitoring and investigation practice, rather than production SOC experience.'},
+malware:{title:'Malware Image Classification',category:'MACHINE LEARNING / CYBERSECURITY',intro:'A machine learning project exploring malware classification through image-based representations.',tools:['Machine learning','Image representations','Classification'],heading:'The idea',points:['Represent malware samples as images for a classification task.','Explore how visual patterns can support machine learning classification.','Connect interests in artificial intelligence and security analysis.'],note:'Further model and evaluation details are available in the original project materials. No accuracy figures are claimed here.'},
+split:{title:'SplitEase',category:'ANDROID / APPLICATION DEVELOPMENT',intro:'An Android application designed to make shared expense management easier through receipt recognition and shareable expense sessions.',tools:['Android','Google Cloud Vision','Firebase Realtime Database'],heading:'What the application does',points:['Manages shared bills and calculates individual payment amounts.','Uses Google Cloud Vision OCR to extract receipt text.','Uses Firebase Realtime Database to share expense sessions through links.'],note:'Developed February–June 2026, with hands-on experience integrating external APIs and cloud services.'}
+};
+const dialog=document.querySelector('#project-dialog');
+document.querySelectorAll('[data-project]').forEach(button=>button.addEventListener('click',()=>{
+ const p=projects[button.dataset.project];
+ document.querySelector('#dialog-content').innerHTML=`<div class="eyebrow subdued">${p.category}</div><h2 id="dialog-title">${p.title}</h2><div class="tags">${p.tools.map(t=>`<span>${t}</span>`).join('')}</div><p class="detail-intro">${p.intro}</p><h3>${p.heading}</h3><ul>${p.points.map(t=>`<li>${t}</li>`).join('')}</ul><p class="detail-note">${p.note}</p><div class="detail-footer">${p.url?`<a class="button primary" href="${p.url}" target="_blank" rel="noopener noreferrer">View repository ↗</a>`:''}</div>`;
+ dialog.showModal();document.body.style.overflow='hidden';
+}));
+document.querySelector('#close-dialog').addEventListener('click',()=>dialog.close());
+dialog.addEventListener('close',()=>{document.body.style.overflow='';});
+dialog.addEventListener('click',e=>{const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();});
+const links=[...document.querySelectorAll('.dock a')];
+const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){links.forEach(a=>{const active=a.getAttribute('href')==='#'+entry.target.id;a.classList.toggle('active',active);if(active)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current');});}});},{rootMargin:'-15% 0px -55% 0px',threshold:0});
+document.querySelectorAll('main section[id]').forEach(s=>observer.observe(s));
+document.querySelector('#year').textContent=new Date().getFullYear();
+document.querySelector('#copy-email').addEventListener('click',async()=>{const toast=document.querySelector('#toast');try{await navigator.clipboard.writeText('jerikhorap@gmail.com');toast.textContent='Email address copied';}catch{toast.textContent='jerikhorap@gmail.com';}toast.classList.add('visible');setTimeout(()=>toast.classList.remove('visible'),3000);});
+
+// Browse project files in a continuous loop.
+const viewer=document.querySelector('.file-browser');
+const cards=[...document.querySelectorAll('.project-card')];
+const pagination=document.querySelector('.deck-pagination');
+const filenames={meeting:'meeting-summarizer.project',housing:'house-price-prediction.project',soc:'mini-soc-lab.project',malware:'malware-classification.project',split:'splitease.project'};
+let visibleCards=cards.slice(),fileIndex=0,lastWheelAt=0,wheelTotal=0,lastWheelEvent=0;
+const previous=document.querySelector('#previous-project'),next=document.querySelector('#next-project');
+function showFile(index){
+ fileIndex=((index%visibleCards.length)+visibleCards.length)%visibleCards.length;
+ cards.forEach(card=>{card.hidden=card!==visibleCards[fileIndex];});
+ const current=visibleCards[fileIndex];
+ document.querySelector('#file-name').textContent=filenames[current.querySelector('[data-project]').dataset.project];
+ document.querySelector('#file-count').textContent=`${String(fileIndex+1).padStart(2,'0')} / ${String(visibleCards.length).padStart(2,'0')}`;
+ previous.disabled=next.disabled=visibleCards.length<2;
+ pagination.querySelectorAll('button').forEach((button,i)=>button.setAttribute('aria-current',String(i===fileIndex)));
+}
+function updatePagination(){
+ pagination.replaceChildren();
+ visibleCards.forEach((card,i)=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-label',`Show ${card.querySelector('h3').textContent.replace('↗','').trim()}`);b.addEventListener('click',()=>showFile(i));pagination.append(b);});
+ showFile(0);
+}
+previous.addEventListener('click',()=>showFile(fileIndex-1));
+next.addEventListener('click',()=>showFile(fileIndex+1));
+viewer.addEventListener('keydown',event=>{
+ if(dialog.open||event.target.closest('.project-open'))return;
+ if(['ArrowRight','ArrowDown','ArrowLeft','ArrowUp','Home','End'].includes(event.key)){
+  event.preventDefault();showFile(event.key==='Home'?0:event.key==='End'?visibleCards.length-1:fileIndex+(['ArrowRight','ArrowDown'].includes(event.key)?1:-1));
+ }
+});
+viewer.addEventListener('wheel',event=>{
+ if(event.ctrlKey||dialog.open||visibleCards.length<2)return;
+ const rect=viewer.getBoundingClientRect();
+ if(rect.top<0||rect.bottom>innerHeight)return;
+ const delta=(Math.abs(event.deltaX)>Math.abs(event.deltaY)?event.deltaX:event.deltaY)*(event.deltaMode===1?16:event.deltaMode===2?innerHeight:1);
+ const direction=Math.sign(delta);
+ if(!direction)return;
+ const now=performance.now();
+ if(now-lastWheelEvent>180)wheelTotal=0;
+ lastWheelEvent=now;
+ if(now-lastWheelAt<650){event.preventDefault();return;}
+ event.preventDefault();wheelTotal+=delta;
+ if(Math.abs(wheelTotal)>45){showFile(fileIndex+direction);lastWheelAt=now;wheelTotal=0;}
+},{passive:false});
+let touchStart=null;
+viewer.addEventListener('touchstart',e=>{if(e.touches.length===1)touchStart={x:e.touches[0].clientX,y:e.touches[0].clientY};},{passive:true});
+viewer.addEventListener('touchend',e=>{if(!touchStart)return;const dx=e.changedTouches[0].clientX-touchStart.x,dy=e.changedTouches[0].clientY-touchStart.y;if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy)*1.3)showFile(fileIndex+(dx<0?1:-1));touchStart=null;},{passive:true});
+document.querySelectorAll('[data-filter]').forEach(button=>button.addEventListener('click',()=>{
+ document.querySelectorAll('[data-filter]').forEach(b=>{b.classList.toggle('active',b===button);b.setAttribute('aria-pressed',String(b===button));});
+ visibleCards=cards.filter(card=>button.dataset.filter==='all'||card.dataset.category.split(' ').includes(button.dataset.filter));
+ updatePagination();
+}));
+updatePagination();
+
+// One entrance per page load; do not replay when navigating project files.
+
+const entranceObserver=new IntersectionObserver(entries=>{
+ entries.forEach(entry=>{if(entry.isIntersecting){viewer.classList.add('viewer-open');entranceObserver.disconnect();}});
+},{threshold:0.2});
+entranceObserver.observe(viewer);
