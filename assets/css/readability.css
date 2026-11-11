@@ -6,3 +6,10 @@
 .education-note .education-icon{display:flex;align-items:center;justify-content:center;width:42px;height:42px;flex:0 0 42px;line-height:0}
 .education-note .education-icon svg{display:block;flex:0 0 23px}
 .detail-intro,.detail-note,.timeline-item p{white-space:pre-line}
+/* Back sheets sit behind one opaque front window, with even eight-pixel steps. */
+.file-browser,html[data-theme=light] .file-browser{background:none;border:0;box-shadow:none}
+.file-front{position:relative;z-index:1;overflow:hidden;border:1px solid #d0e0ff20;border-radius:23px;background:linear-gradient(140deg,#1b2230,#10151f);box-shadow:0 25px 70px #0003,inset 0 1px #ffffff06}
+.file-browser::before{inset:8px 8px -8px;z-index:0;border-radius:23px}
+.file-browser::after{inset:16px 16px -16px;z-index:-1;border-radius:23px}
+html[data-theme=light] .file-front{background:linear-gradient(140deg,#fdfefe,#e8edf6);border-color:#cdd7e7;box-shadow:0 25px 70px #60769714,inset 0 1px #fff}
+.work-note{margin-top:30px}

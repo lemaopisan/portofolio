@@ -20,13 +20,13 @@
   if(!input||input.version!==1||!input.profile)throw new Error('This content file has an unsupported format.');
   for(const name of ['projects','experience','toolkit','education'])if(!Array.isArray(input[name])||input[name].length>100)throw new Error('Invalid '+name+' collection.');
   const id=(v,i)=>text(v,64).replace(/[^a-z0-9_-]/g,'')||'item-'+i;
-  const profile={aboutHeading:text(input.profile.aboutHeading,160)||'A little about me.',about:lines(input.profile.about).slice(0,20),heroIntro:text(input.profile.heroIntro,1000),heroNote:text(input.profile.heroNote,600),cvUrl:safeUrl(input.profile.cvUrl,true)||'/Jerikho-Stefian-CV.pdf'};
+  const profile={aboutHeading:text(input.profile.aboutHeading,160)||'A little about me.',about:lines(input.profile.about).slice(0,20),heroIntro:text(input.profile.heroIntro,1000),heroNote:text(input.profile.heroNote,600),cvUrl:safeUrl(input.profile.cvUrl,true)||'/assets/documents/Jerikho-Stefian-CV.pdf'};
   const projects=input.projects.map((p,i)=>({id:id(p.id,i),title:text(p.title,180),kicker:text(p.kicker,180),summary:text(p.summary,1200),categories:lines(p.categories).filter(c=>['ai','security','app'].includes(c)),visual:['meeting','housing','soc','malware','split','file'].includes(p.visual)?p.visual:'file',tools:lines(p.tools).slice(0,30),intro:text(p.intro),heading:text(p.heading,160)||'Project details',points:lines(p.points).slice(0,40),note:text(p.note),links:(Array.isArray(p.links)?p.links:[]).slice(0,12).map(l=>({label:text(l.label,100)||'Open link',url:safeUrl(l.url)})).filter(l=>l.url)}));
   if(new Set(projects.map(p=>p.id)).size!==projects.length)throw new Error('Project identifiers must be unique.');
   if(projects.some(p=>!p.title||!p.categories.length))throw new Error('Each project needs a title and at least one category.');
   return {version:1,profile,projects,experience:input.experience.map((p,i)=>({id:id(p.id,i),title:text(p.title,180),organization:text(p.organization,180),date:text(p.date,180),description:text(p.description),tags:lines(p.tags).slice(0,30),incoming:p.incoming===true})),toolkit:input.toolkit.map((p,i)=>({id:id(p.id,i),title:text(p.title,180),items:lines(p.items).slice(0,50)})),education:input.education.map((p,i)=>({id:id(p.id,i),institution:text(p.institution,180),program:text(p.program,300),date:text(p.date,180),details:text(p.details,2000),icon:p.icon==='shield'?'shield':'graduation'}))};
  }
- async function defaults(){const r=await fetch('/content.json',{cache:'no-cache'});if(!r.ok)throw new Error('Could not load the bundled website content.');return normalize(await r.json());}
+ async function defaults(){const r=await fetch('/data/content.json',{cache:'no-cache'});if(!r.ok)throw new Error('Could not load the bundled website content.');return normalize(await r.json());}
  async function load(){
   const fallback=await defaults(),c=connection();if(!c)return fallback;
   const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),3000);

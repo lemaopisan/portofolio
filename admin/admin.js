@@ -4,7 +4,7 @@
  const names={overview:'Overview',projects:'Projects',experience:'Experience',toolkit:'Toolkit',education:'Education & training',about:'About me',cv:'CV document',analytics:'Analytics',backup:'Backup & help'};
  let client=null,draft=null,revision=0,tab='overview',dirty=false,preview=false,publishing=false,formEdits=false,statsRange=30,statusTimer;
  const base=await C.defaults().catch(()=>null);
- if(!base){$('#loading-panel').innerHTML='<h1>Could not load your content.</h1><p>Check that content.json was uploaded with the website, then reload this page.</p>';return;}
+ if(!base){$('#loading-panel').innerHTML='<h1>Could not load your content.</h1><p>Check that data/content.json was uploaded with the website, then reload this page.</p>';return;}
  function ask(message){return new Promise(resolve=>{const modal=document.querySelector('#studio-confirm');modal.querySelector('p').textContent=message;modal.returnValue='cancel';modal.addEventListener('close',()=>resolve(modal.returnValue==='confirm'),{once:true});modal.showModal();});}
  function status(message,error=false){clearTimeout(statusTimer);const el=$('#studio-status');el.textContent=message;el.className='studio-status visible'+(error?' error':'');statusTimer=setTimeout(()=>el.classList.remove('visible'),error?10000:5000);}
  function show(id){['setup-panel','login-panel','loading-panel','workspace'].forEach(name=>$('#'+name).hidden=name!==id);}

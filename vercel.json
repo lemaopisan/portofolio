@@ -19,7 +19,7 @@
       ]
     },
     {
-      "source": "/content.json",
+      "source": "/data/content.json",
       "headers": [
         {
           "key": "Cache-Control",
@@ -28,7 +28,7 @@
       ]
     },
     {
-      "source": "/config.js",
+      "source": "/assets/js/config.js",
       "headers": [
         {
           "key": "Cache-Control",
@@ -48,6 +48,13 @@
           "value": "strict-origin-when-cross-origin"
         }
       ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/Jerikho-Stefian-CV.pdf",
+      "destination": "/assets/documents/Jerikho-Stefian-CV.pdf",
+      "permanent": true
     }
   ]
 }
